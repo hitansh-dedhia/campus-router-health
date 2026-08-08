@@ -9,7 +9,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Load datasets at startup
-base_dir = os.path.dirname(os.path.abspath(__name__))
+base_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.join(base_dir, 'sample_data')
 
 routers_df = pd.read_csv(os.path.join(data_dir, 'routers.csv'))
