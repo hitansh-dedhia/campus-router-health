@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Router Health Monitor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Campus Router Health 360</h1>
+    </header>
+    
+    <div class="container">
+        <!-- Left Panel: Rankings -->
+        <div class="panel" id="rankings-panel">
+            <h2>Worst 10 Routers</h2>
+            <table id="rankings-table">
+                <thead>
+                    <tr>
+                        <th>Router ID</th>
+                        <th>Building</th>
+                        <th>Score</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="rankings-body">
+                    <!-- Rows will be injected here by JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Right Panel: Detail Placeholder (We will build this in the next subpart) -->
+        <div class="panel" id="detail-panel">
+            <h2>Router Details</h2>
+            <p>Select a router from the list to view its details.</p>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
