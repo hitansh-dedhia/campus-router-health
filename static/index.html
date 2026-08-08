@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Router Health Monitor</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
@@ -47,8 +48,9 @@
                     <li>Disconnects: <span id="detail-disconnects"></span></li>
                     <li>Signal: <span id="detail-signal"></span></li>
                 </ul>
-                <div id="charts-placeholder">
-                    <p><em>(Charts will be added here in the next subpart)</em></p>
+                <div id="charts-container" style="display:flex; flex-direction:column; gap:20px; margin-top:20px; max-height:400px; overflow-y:auto;">
+                    <canvas id="speedLatencyChart"></canvas>
+                    <canvas id="lossDisconnectsChart"></canvas>
                 </div>
             </div>
             <p id="detail-empty">Select a router from the list to view its details.</p>
