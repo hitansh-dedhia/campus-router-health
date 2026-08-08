@@ -19,6 +19,7 @@
             <table id="rankings-table">
                 <thead>
                     <tr>
+                        <th>Rank</th>
                         <th>Router ID</th>
                         <th>Building</th>
                         <th>Score</th>
@@ -53,15 +54,15 @@
                     <canvas id="lossDisconnectsChart"></canvas>
                 </div>
                 <hr>
-                <div id="copilot-section" style="margin-top: 20px; background: #eef; padding: 15px; border-radius: 5px;">
+                <div id="copilot-section">
                     <h4>AI Diagnostics Copilot</h4>
                     <p>Ask Gemini to analyze this router's data and recommend a fix.</p>
                     <button id="ask-copilot-btn">Ask Copilot</button>
-                    <div id="copilot-loading" style="display:none; color: blue; margin-top: 10px;">Analyzing data...</div>
-                    <div id="copilot-result" style="display:none; margin-top: 15px;">
+                    <div id="copilot-loading" style="display:none; color: #4F46E5; margin-top: 10px; font-weight: 500;">Analyzing data...</div>
+                    <div id="copilot-result" style="display:none;">
                         <p><strong>Cause:</strong> <span id="copilot-cause"></span></p>
                         <p><strong>Evidence:</strong> <ul id="copilot-evidence"></ul></p>
-                        <p><strong>Recommended Fix:</strong> <strong id="copilot-fix" style="color: red;"></strong></p>
+                        <p><strong>Recommended Fix:</strong> <strong id="copilot-fix"></strong></p>
                     </div>
                 </div>
             </div>

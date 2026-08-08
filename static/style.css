@@ -1,42 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 body {
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+    background-color: #F4F7F9; /* Light grey SaaS background */
+    color: #1E293B; /* Dark slate text */
 }
 
+/* TOP NAVIGATION */
 header {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
-    text-align: center;
+    background-color: #FFFFFF;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
+header h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0F172A;
+}
+
+/* LAYOUT */
 .container {
     display: flex;
-    padding: 20px;
-    gap: 20px;
+    padding: 2rem;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: flex-start;
 }
 
 .panel {
-    background: white;
-    padding: 20px;
-    border: 1px solid #ccc;
+    background: #FFFFFF;
+    padding: 1.5rem;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     flex: 1;
 }
 
+#rankings-panel {
+    flex: 1;
+}
+
+#detail-panel {
+    flex: 1.2;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0F172A;
+    border-bottom: 1px solid #E2E8F0;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* TABLES */
 table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
-th, td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+th {
     text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #64748B;
+    border-bottom: 1px solid #E2E8F0;
 }
 
-tr:hover {
-    background-color: #f1f1f1;
+td {
+    padding: 1rem;
+    font-size: 0.875rem;
+    color: #334155;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+    background-color: #F8FAFC;
     cursor: pointer;
+}
+
+/* STATUS BADGES */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px; /* Pill shape */
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.badge-critical { background: #FEE2E2; color: #991B1B; }
+.badge-poor     { background: #FEF3C7; color: #92400E; }
+.badge-good     { background: #D1FAE5; color: #065F46; }
+
+/* DETAILS PANEL & COPILOT */
+hr {
+    border: 0;
+    border-top: 1px solid #E2E8F0;
+    margin: 1.5rem 0;
+}
+
+ul {
+    padding-left: 1.2rem;
+    line-height: 1.6;
+}
+
+/* COPILOT UI */
+#copilot-section {
+    margin-top: 20px; 
+    background: #F8FAFC; 
+    padding: 1.5rem; 
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+}
+
+#copilot-section h4 {
+    margin-top: 0;
+    color: #4F46E5; /* SaaS Blue Accent */
+}
+
+button {
+    background-color: #4F46E5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+button:hover {
+    background-color: #4338CA;
+}
+
+#copilot-result {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-top: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+#copilot-fix {
+    color: #B91C1C !important;
 }

@@ -14,17 +14,22 @@ async function loadRankings() {
         const tbody = document.getElementById('rankings-body');
         tbody.innerHTML = ''; // clear loading state
         
-        routers.forEach(router => {
+        routers.forEach((router, index) => {
             const tr = document.createElement('tr');
             
             // Add click event to load details
             tr.onclick = () => loadRouterDetail(router.router_id);
             
+            let badgeClass = 'badge-good';
+            if(router.status === 'Critical') badgeClass = 'badge-critical';
+            else if(router.status === 'Poor') badgeClass = 'badge-poor';
+            
             tr.innerHTML = `
+                <td><strong>${index + 1}</strong></td>
                 <td>${router.router_id}</td>
                 <td>${router.building}</td>
                 <td>${router.health_score}</td>
-                <td>${router.status}</td>
+                <td><span class="badge ${badgeClass}">${router.status}</span></td>
             `;
             tbody.appendChild(tr);
         });
