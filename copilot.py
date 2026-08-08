@@ -1,16 +1,18 @@
 import os
 import json
-import google.generativeai as genai
+from google import genai
+from google.genai import types
+from dotenv import load_dotenv
 
-# Try to load from environment or .env file (assuming python-dotenv might be used later, but for now we'll just check os.environ)
+load_dotenv() # This reads the .env file
+
+# Try to load from environment or .env file
 # For this hackathon, we'll expect the key to be set in the environment or passed directly if hardcoded for testing.
 API_KEY = os.environ.get("GEMINI_API_KEY")
+# Initialize the new Google GenAI client
+client = None
 if API_KEY:
-    genai.configure(api_key=API_KEY)
-
-# Define the model with JSON output enforcement
-# We use gemini-1.5-flash (or 2.0-flash if available) as it's fast and suitable for this task
-model = genai.GenerativeModel('gemini-1.5-flash', generation_config={"response_mime_type": "application/json"})
+    client = genai.Client(api_key=API_KEY)
 
 def diagnose_router(router_detail, question):
     """
@@ -79,7 +81,13 @@ Output strictly valid JSON with the following schema:
     prompt = f"{system_prompt}\n\n{context}\n\nUSER QUESTION: {question}"
 
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model='gemini-3.5-flash',
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+            )
+        )
         # Parse the JSON response
         result = json.loads(response.text)
         return result
