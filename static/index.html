@@ -30,10 +30,28 @@
             </table>
         </div>
 
-        <!-- Right Panel: Detail Placeholder (We will build this in the next subpart) -->
+        <!-- Right Panel: Detail Placeholder -->
         <div class="panel" id="detail-panel">
             <h2>Router Details</h2>
-            <p>Select a router from the list to view its details.</p>
+            <div id="detail-content" style="display: none;">
+                <h3 id="detail-title"></h3>
+                <p><strong>Building:</strong> <span id="detail-building"></span> (Room <span id="detail-room"></span>)</p>
+                <p><strong>Model:</strong> <span id="detail-model"></span> | <strong>Firmware:</strong> <span id="detail-firmware"></span></p>
+                <hr>
+                <h4>Health Scores</h4>
+                <ul>
+                    <li>Overall: <strong id="detail-overall"></strong>/100</li>
+                    <li>Speed: <span id="detail-speed"></span></li>
+                    <li>Latency: <span id="detail-latency"></span></li>
+                    <li>Packet Loss: <span id="detail-loss"></span></li>
+                    <li>Disconnects: <span id="detail-disconnects"></span></li>
+                    <li>Signal: <span id="detail-signal"></span></li>
+                </ul>
+                <div id="charts-placeholder">
+                    <p><em>(Charts will be added here in the next subpart)</em></p>
+                </div>
+            </div>
+            <p id="detail-empty">Select a router from the list to view its details.</p>
         </div>
     </div>
 

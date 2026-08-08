@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from health_engine import compute_health_scores, get_worst_n, get_router_detail
 from copilot import diagnose_router
@@ -18,6 +18,11 @@ complaints_df = pd.read_csv(os.path.join(data_dir, 'COMPLA~1.CSV')) # keeping th
 
 # Compute scores once at startup
 scores_df = compute_health_scores(metrics_df, routers_df)
+
+@app.route('/')
+def serve_index():
+    """Serve the frontend dashboard."""
+    return send_from_directory('static', 'index.html')
 
 @app.route('/api/rankings', methods=['GET'])
 def get_rankings():
