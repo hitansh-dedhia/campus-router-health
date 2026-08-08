@@ -3,6 +3,7 @@ import pandas as pd
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from health_engine import compute_health_scores, get_worst_n, get_router_detail
+from copilot import diagnose_router
 
 app = Flask(__name__)
 CORS(app)
@@ -32,6 +33,23 @@ def get_router(router_id):
     if detail:
         return jsonify(detail)
     return jsonify({"error": "Router not found"}), 404
+
+@app.route('/api/copilot', methods=['POST'])
+def run_copilot():
+    """Runs the AI copilot for a router."""
+    data = request.json
+    if not data or 'router_id' not in data or 'question' not in data:
+        return jsonify({"error": "Missing router_id or question"}), 400
+        
+    router_id = data['router_id']
+    question = data['question']
+    
+    router_detail = get_router_detail(router_id, scores_df, metrics_df, complaints_df)
+    if not router_detail:
+        return jsonify({"error": "Router not found"}), 404
+        
+    diagnosis = diagnose_router(router_detail, question)
+    return jsonify(diagnosis)
 
 @app.route('/api/stats', methods=['GET'])
 def get_stats():
