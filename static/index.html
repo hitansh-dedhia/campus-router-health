@@ -52,6 +52,18 @@
                     <canvas id="speedLatencyChart"></canvas>
                     <canvas id="lossDisconnectsChart"></canvas>
                 </div>
+                <hr>
+                <div id="copilot-section" style="margin-top: 20px; background: #eef; padding: 15px; border-radius: 5px;">
+                    <h4>AI Diagnostics Copilot</h4>
+                    <p>Ask Gemini to analyze this router's data and recommend a fix.</p>
+                    <button id="ask-copilot-btn">Ask Copilot</button>
+                    <div id="copilot-loading" style="display:none; color: blue; margin-top: 10px;">Analyzing data...</div>
+                    <div id="copilot-result" style="display:none; margin-top: 15px;">
+                        <p><strong>Cause:</strong> <span id="copilot-cause"></span></p>
+                        <p><strong>Evidence:</strong> <ul id="copilot-evidence"></ul></p>
+                        <p><strong>Recommended Fix:</strong> <strong id="copilot-fix" style="color: red;"></strong></p>
+                    </div>
+                </div>
             </div>
             <p id="detail-empty">Select a router from the list to view its details.</p>
         </div>

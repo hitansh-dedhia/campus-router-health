@@ -1,5 +1,6 @@
 let speedLatencyChartInstance = null;
 let lossDisconnectsChartInstance = null;
+let currentRouterId = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     loadRankings();
@@ -42,6 +43,11 @@ async function loadRouterDetail(routerId) {
         document.getElementById('detail-empty').style.display = 'none';
         document.getElementById('detail-content').style.display = 'block';
         
+        currentRouterId = routerId;
+        
+        // Hide previous copilot results
+        document.getElementById('copilot-result').style.display = 'none';
+        
         // Populate text fields
         document.getElementById('detail-title').textContent = `${data.router_id} (${data.status})`;
         document.getElementById('detail-building').textContent = data.building;
@@ -59,6 +65,9 @@ async function loadRouterDetail(routerId) {
         
         // Render Charts
         renderCharts(data.metrics);
+        
+        // Bind Copilot Button
+        document.getElementById('ask-copilot-btn').onclick = () => askCopilot(currentRouterId);
         
     } catch (error) {
         console.error('Error fetching router details:', error);
@@ -109,4 +118,47 @@ function renderCharts(metrics) {
             scales: { y: { beginAtZero: true } }
         }
     });
+}
+
+async function askCopilot(routerId) {
+    if (!routerId) return;
+    
+    document.getElementById('copilot-loading').style.display = 'block';
+    document.getElementById('copilot-result').style.display = 'none';
+    
+    try {
+        const response = await fetch('/api/copilot', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                router_id: routerId, 
+                question: "Why is this router performing poorly? Provide cause, evidence, and fix." 
+            })
+        });
+        
+        const data = await response.json();
+        
+        document.getElementById('copilot-cause').textContent = data.cause;
+        document.getElementById('copilot-fix').textContent = data.recommended_fix;
+        
+        const evList = document.getElementById('copilot-evidence');
+        evList.innerHTML = '';
+        if (data.evidence && data.evidence.length > 0) {
+            data.evidence.forEach(ev => {
+                const li = document.createElement('li');
+                li.textContent = ev;
+                evList.appendChild(li);
+            });
+        } else {
+            evList.innerHTML = '<li>No specific evidence provided.</li>';
+        }
+        
+        document.getElementById('copilot-loading').style.display = 'none';
+        document.getElementById('copilot-result').style.display = 'block';
+        
+    } catch (error) {
+        console.error('Error calling copilot:', error);
+        alert('Failed to get response from AI Copilot.');
+        document.getElementById('copilot-loading').style.display = 'none';
+    }
 }
